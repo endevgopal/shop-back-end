@@ -9,7 +9,7 @@ const categoryRouter = require('./routers/caregory');
 const upRouter = require('./routers/upload');
 const productRouter = require('./routers/product');
 const paymentRouter = require('./routers/payment');
-const path = require('path')
+const path = require('path');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -48,7 +48,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log('Server is running on Port', PORT);
+  console.log('Server is running on Port', port);
 });
