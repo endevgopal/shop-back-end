@@ -11,9 +11,11 @@ const productRouter = require('./routers/product');
 const paymentRouter = require('./routers/payment');
 const path = require('path');
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+
 app.use(
   fileUpload({
     useTempFiles: true,
@@ -42,12 +44,11 @@ app.use('/api', productRouter);
 app.use('/api', paymentRouter);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.use(express.static(__dirname + '/client/build'));
   app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
 }
-
 
 app.listen(process.env.PORT || 5000, function () {
   console.log(
