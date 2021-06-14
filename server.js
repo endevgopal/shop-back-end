@@ -36,9 +36,7 @@ mongoose.connect(
     console.log('Connected to MongoDB');
   }
 );
-app.use('/', (req, res) => {
-  res.json({ msg: 'Oppps!' });
-});
+
 app.use('/user', userRouter);
 app.use('/api', categoryRouter);
 app.use('/api', upRouter);

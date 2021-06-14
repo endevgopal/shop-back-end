@@ -11,6 +11,9 @@ const {
 const { auth, authAdmin } = require('../middleware/auth');
 const userRouter = express.Router();
 
+userRouter.get('/', (req, res) => {
+  res.json({ msg: 'Oppps!' });
+});
 userRouter.post('/register', registration);
 userRouter.post('/login', login);
 userRouter.get('/logout', logout);
