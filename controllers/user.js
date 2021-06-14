@@ -26,12 +26,12 @@ exports.registration = async (req, res, next) => {
     const accessToken = await createAccessToken({ id: newUser._id });
     const refreshToken = await createRefreshToken({ id: newUser._id });
 
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      path: '/user/refreshToken',
-    });
+    // res.cookie('refreshToken', refreshToken, {
+    //   httpOnly: true,
+    //   path: '/user/refreshToken',
+    // });
 
-    res.json({ token: accessToken });
+    res.json({ refreshToken: refreshToken, token: accessToken });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }
@@ -50,12 +50,12 @@ exports.login = async (req, res, next) => {
     const accessToken = await createAccessToken({ id: user._id });
     const refreshToken = await createRefreshToken({ id: user._id });
 
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      path: '/user/refreshToken',
-    });
+    // res.cookie('refreshToken', refreshToken, {
+    //   httpOnly: true,
+    //   path: '/user/refreshToken',
+    // });
 
-    res.json({ token: accessToken });
+    res.json({ refreshToken: refreshToken, token: accessToken });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -73,7 +73,7 @@ exports.logout = async (req, res, next) => {
 
 exports.rf_token = (req, res) => {
   try {
-    const rfToken = req.cookies.refreshToken;
+    const rfToken = req.header('setCookie');
     if (!rfToken) return res.status(400).json({ msg: 'Please Login again' });
 
     jwt.verify(rfToken, process.env.secret, async (err, user) => {
