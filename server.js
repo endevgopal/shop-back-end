@@ -12,7 +12,11 @@ const paymentRouter = require('./routers/payment');
 const path = require('path');
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  credentials: true,
+  ///..other options
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -21,12 +25,7 @@ app.use(
     useTempFiles: true,
   })
 );
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Headers', '*');
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-  next();
-});  
+
 
 const url = process.env.MONGO_URL;
 mongoose.connect(
