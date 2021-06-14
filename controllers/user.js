@@ -29,7 +29,6 @@ exports.registration = async (req, res, next) => {
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       path: '/user/refreshToken',
-      secure: process.env.NODE_ENV === 'production' ? true : false,
     });
 
     res.json({ token: accessToken });
@@ -54,7 +53,6 @@ exports.login = async (req, res, next) => {
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       path: '/user/refreshToken',
-      secure: process.env.NODE_ENV === 'production' ? true : false,
     });
 
     res.json({ token: accessToken });
