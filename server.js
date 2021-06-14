@@ -36,19 +36,21 @@ mongoose.connect(
     console.log('Connected to MongoDB');
   }
 );
-
+app.use('/', (req, res) => {
+  res.json({ msg: 'Oppps!' });
+});
 app.use('/user', userRouter);
 app.use('/api', categoryRouter);
 app.use('/api', upRouter);
 app.use('/api', productRouter);
 app.use('/api', paymentRouter);
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static('client/build'));
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+//   });
+// }
 
 app.listen(process.env.PORT || 5000, function () {
   console.log(
@@ -57,4 +59,3 @@ app.listen(process.env.PORT || 5000, function () {
     app.settings.env
   );
 });
-
