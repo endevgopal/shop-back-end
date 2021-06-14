@@ -19,7 +19,6 @@ userRouter.post('/login', login);
 userRouter.get('/logout', logout);
 userRouter.get('/refreshToken', rf_token);
 userRouter.get('/info', auth, getUser);
-userRouter.get('/refreshToken', rf_token);
 userRouter.post('/addToCart', auth, addToCart);
 userRouter.get('/history', auth, getHistory);
 
